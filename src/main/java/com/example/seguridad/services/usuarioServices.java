@@ -1,5 +1,7 @@
 package com.example.seguridad.services;
 
-public interface usuarioServices {
+import com.example.seguridad.models.Usuario;
 
+public interface usuarioServices {
+    void guardarDatos(Usuario user);
 }

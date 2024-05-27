@@ -16,13 +16,18 @@ import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     @Override
-    protected void configure(AuthenticationManagerBuilder auth){
+    protected void configure(AuthenticationManagerBuilder auth)throws Exception{
+        auth
+            .inMemoryAuthentication()
+            .withUser("usuario").password(passwordEncoder().encode("contraseña")).roles("USER");
     }
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.cors().and()
                 .authorizeRequests()
                 .antMatchers("/api/status/**").permitAll()
+                .antMatchers("/api/authenticate/**").permitAll()
+                //.antMatchers("api/intruction/*.hasRole("INTRUCCION")/")
                 .and().csrf().disable();
     }
     @Override
